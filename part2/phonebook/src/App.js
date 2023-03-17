@@ -12,8 +12,8 @@ const App = () => {
 
   useEffect(() => {
     personService.getAll()
-      .then(response => {
-        setPersons(response.data)
+      .then(initialPerson => {
+        setPersons(initialPerson)
       })
   }, []);
 
@@ -31,13 +31,23 @@ const App = () => {
       };
 
       personService.create(newPerson)
-        .then(response => {
-          setPersons(persons.concat(response.data));
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson));
           setNewName('');
           setNewNumber('');
         })
     };
   };
+
+  const delPerson = (person) => {
+    const check = window.confirm(`Delete ${person.name} from your phonebook?`);
+    if (check) {
+      personService.remove(person.id)
+        .then(() => {
+          setPersons(persons.filter(per => per.id !== person.id))
+        })
+    }
+  }
 
   const peopleToShow = searchQ === ''
     ? persons
@@ -55,7 +65,7 @@ const App = () => {
 
       <h2>Numbers</h2>
 
-      <Persons peopleToShow={peopleToShow} />
+      <Persons peopleToShow={peopleToShow} delPerson={delPerson} />
     </div>
   );
 };
