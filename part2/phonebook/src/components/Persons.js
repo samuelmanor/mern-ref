@@ -1,15 +1,10 @@
-import React from "react";
+import React from 'react';
 
-const Persons = ({ peopleToShow, delPerson }) => {
+const Persons = ({ personsToShow, handleDelete }) => {
     return (
-    <div>
-        {peopleToShow.map(person => 
-        <div key={person.name}>
-            <p key={person.name}>{person.name} {person.number}</p>
-            <button onClick={() => delPerson(person)}>delete</button>
+        <div>
+            {personsToShow.map(person => <p key={person.name}>{person.name} {person.number} <button type="button" onClick={() => handleDelete(person)}>Delete</button></p>)}
         </div>
-        )}
-    </div>
     )
 };
 

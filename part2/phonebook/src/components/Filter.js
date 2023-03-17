@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const Filter = ({ searchQ, setSearchQ }) => {
+const Filter = ({ search, onChange }) => {
     return (
-    <div>
-        filter shown with <input value={searchQ} onChange={(event) => setSearchQ(event.target.value)} />
-    </div>
-    )
-}
+        <div>Name: <input value={search} name="search" onChange={onChange}/></div>
+    );
+};
 
 export default Filter;
