@@ -1,3 +1,13 @@
-const notesRouter = require('./controllers/notes');
+const config = require('./utils/config');
+const express = require('express');
+const app = express();
 
-app.use('/api/notes', notesRouter);
+
+
+
+
+
+
+// const notesRouter = require('./controllers/notes');
+
+// app.use('/api/notes', notesRouter);
