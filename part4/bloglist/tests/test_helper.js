@@ -8,7 +8,7 @@ const initialBlogs = [
         likes: 10
     },
     {
-        title: 'lorem ipsum',
+        title: 'example blog',
         author: 'jeff tool',
         url: 'hello',
         likes: 3
