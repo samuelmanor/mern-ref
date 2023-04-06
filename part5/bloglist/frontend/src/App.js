@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import Blog from './components/blog';
+import Notification from './components/notification';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
+  const [notif, setNotif] = useState('');
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -38,7 +41,7 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      console.log('wrong credentials');
+      handleNotif('wrong username or password', 'warning');
     }
   };
 
@@ -63,7 +66,20 @@ const App = () => {
         setTitle('');
         setAuthor('');
         setUrl('');
+
+        handleNotif(`added ${blogObject.title} by ${blogObject.author}`, 'created');
       });
+  };
+
+  const handleNotif = (message, type) => {
+    setNotif({
+      message: message,
+      type: type
+    });
+
+    setTimeout(() => {
+      setNotif(null);
+    }, 5000);
   };
 
   const loginForm = (
@@ -117,6 +133,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={notif} />
       {user === null
         ? loginForm
         : <div><p>{user.name} logged in</p><button onClick={handleLogout}>log out</button></div>}
