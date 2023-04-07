@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Blog = ({ blog, handleUpdate }) => {
+const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
     const [showInfo, setShowInfo] = useState(false);
 
     const toggleShow = () => {
@@ -27,6 +27,7 @@ const Blog = ({ blog, handleUpdate }) => {
                 <p>likes: {blog.likes}</p> <button onClick={addLike}>like</button>
                 <p>posted by {blog.user.username}</p>
             </div>
+            {user.username === blog.user.username ? <button onClick={() => handleDelete(blog.id)}>delete blog</button>: null}
         </div>
     );
 };

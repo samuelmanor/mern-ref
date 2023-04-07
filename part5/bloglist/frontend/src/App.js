@@ -49,6 +49,7 @@ const App = () => {
     formRef.current.toggleVisibility();
     blogService.create(obj)
       .then(returnedBlog => {
+        console.log(returnedBlog);
         setBlogs(blogs.concat(returnedBlog));
 
         handleNotif(`added '${obj.title}' by ${obj.author}`, 'created');
@@ -60,6 +61,15 @@ const App = () => {
     if (updatedBlog) {
       setBlogs(blogs.map(blog => blog.id !== updatedBlog.id ? blog : updatedBlog));
     };
+  };
+
+  const handleDelete = async (objId) => {
+    try {
+      await blogService.remove(objId);
+      setBlogs(blogs.filter(blog => blog.id !== objId));
+    } catch (exception) {
+      console.log('error');
+    }
   };
 
   const handleNotif = (message, type) => {
@@ -78,7 +88,7 @@ const App = () => {
     return copy.sort((a, b) => b.likes - a.likes);
   };
 
-  const blogMap = sortedBlogs().map(blog => <Blog key={blog.id} blog={blog} handleUpdate={handleUpdate} />);
+  const blogMap = sortedBlogs().map(blog => <Blog key={blog.id} blog={blog} handleUpdate={handleUpdate} user={user} handleDelete={handleDelete} />);
 
   return (
     <div>
