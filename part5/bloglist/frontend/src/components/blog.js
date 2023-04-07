@@ -27,7 +27,7 @@ const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
                 <p>likes: {blog.likes}</p> <button onClick={addLike}>like</button>
                 <p>posted by {blog.user.username}</p>
             </div>
-            {user.username === blog.user.username ? <button onClick={() => handleDelete(blog.id)}>delete blog</button>: null}
+            {user !== null && user.username === blog.user.username ? <button onClick={() => handleDelete(blog.id)}>delete blog</button>: null}
         </div>
     );
 };
