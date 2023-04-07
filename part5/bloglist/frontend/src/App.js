@@ -55,6 +55,13 @@ const App = () => {
       });
   };
 
+  const handleUpdate = async (obj) => {
+    const updatedBlog = await blogService.update(obj.id, obj);
+    if (updatedBlog) {
+      setBlogs(blogs.map(blog => blog.id !== updatedBlog.id ? blog : updatedBlog));
+    };
+  };
+
   const handleNotif = (message, type) => {
     setNotif({
       message: message,
@@ -66,7 +73,7 @@ const App = () => {
     }, 5000);
   };
 
-  const blogMap = blogs.map(blog => <Blog key={blog.id} blog={blog} />);
+  const blogMap = blogs.map(blog => <Blog key={blog.id} blog={blog} handleUpdate={handleUpdate} />);
 
   return (
     <div>

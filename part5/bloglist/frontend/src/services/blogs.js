@@ -21,6 +21,11 @@ const create = async newObject => {
     return response.data;
 };
 
-const exportObject = { getAll, setToken, create };
+const update = (id, newObj) => {
+    const request = axios.put(`${baseUrl}/${id}`, newObj);
+    return request.then(response => response.data);
+};
+
+const exportObject = { getAll, setToken, create, update };
 
 export default exportObject;

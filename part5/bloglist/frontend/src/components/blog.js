@@ -1,11 +1,22 @@
 import { useState } from "react";
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, handleUpdate }) => {
     const [showInfo, setShowInfo] = useState(false);
 
     const toggleShow = () => {
         setShowInfo(!showInfo)
-    }
+    };
+
+    const addLike = () => {
+        const updatedBlog = {
+            title: blog.title,
+            author: blog.author,
+            url: blog.url,
+            likes: blog.likes + 1,
+            id: blog.id
+        };
+        handleUpdate(updatedBlog);
+    };
 
     return (
         <div>
@@ -13,7 +24,7 @@ const Blog = ({ blog }) => {
             <button onClick={toggleShow}>view</button>
             <div style={{ display: showInfo ? '' : 'none' }}>
                 <p>{blog.url}</p>
-                <p>likes: {blog.likes}</p> <button>like</button>
+                <p>likes: {blog.likes}</p> <button onClick={addLike}>like</button>
                 <p>posted by {blog.user.username}</p>
             </div>
         </div>
