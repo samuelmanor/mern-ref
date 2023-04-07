@@ -16,7 +16,7 @@ const App = () => {
   const formRef = useRef();
 
   useEffect(() => {
-    blogService.getAll().then(blogs => {setBlogs(blogs)});
+    blogService.getAll().then(blogs => {setBlogs(blogs);});
   }, []);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const App = () => {
     }
   }, [blogs]);
 
-  const handleLogin = async (info) => {    
+  const handleLogin = async (info) => {
     try {
       const user = await loginService.login(info);
 
@@ -60,7 +60,7 @@ const App = () => {
     const updatedBlog = await blogService.update(obj.id, obj);
     if (updatedBlog) {
       setBlogs(blogs.map(blog => blog.id !== updatedBlog.id ? blog : updatedBlog));
-    };
+    }
   };
 
   const handleDelete = async (objId) => {
@@ -95,16 +95,16 @@ const App = () => {
       <Notification message={notif} />
       {user === null
         ? <Togglable buttonLabel='log in'>
-            <LoginForm login={handleLogin} />
-          </Togglable>
+          <LoginForm login={handleLogin} />
+        </Togglable>
         : <div><p>{user.name} logged in</p><button onClick={handleLogout}>log out</button></div>}
 
       <h2>blogs</h2>
       {user === null
         ? null
         : <Togglable buttonLabel='new blog' ref={formRef}>
-            <BlogForm handleCreateBlog={handleCreateBlog} />
-          </Togglable>}
+          <BlogForm handleCreateBlog={handleCreateBlog} />
+        </Togglable>}
       {blogMap}
     </div>
   );
