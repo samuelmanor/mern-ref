@@ -5,11 +5,11 @@ import userEvent from '@testing-library/user-event';
 import Blog from "./blog";
 
 describe('<Blog />', () => {
-    let blog;
     let component;
+    let mockHandler;
 
     beforeEach(() => {
-        blog = {
+        const blog = {
             title: 'lorem ipsum dolor sit amet',
             author: 'john smith',
             url: 'www.website.com',
@@ -22,7 +22,7 @@ describe('<Blog />', () => {
 
         mockHandler = jest.fn();
 
-        component = render(<Blog blog={blog}  />)
+        component = render(<Blog blog={blog} handleUpdate={mockHandler} />)
     })
 
     test('renders content', () => {
@@ -38,4 +38,16 @@ describe('<Blog />', () => {
 
         expect(component.container).toHaveTextContent('john smith');
     });
+
+    test('clicking the like button calls the event handler correctly', async () => {
+        const user = userEvent.setup();
+
+        const viewBtn = component.container.querySelector('#view-btn');
+        await user.click(viewBtn);
+
+        const likeBtn = component.container.querySelector('#like-btn');
+        await user.click(likeBtn);
+
+        expect(mockHandler.mock.calls).toHaveLength(1);
+    })
 });
