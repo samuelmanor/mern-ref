@@ -25,7 +25,7 @@ const LoginForm = ({ login }) => {
           onChange={({ target }) => setUsername(target.value)} />
       </div>
       <div>
-                password
+        password
         <input
           type='password'
           value={password}
@@ -37,7 +37,7 @@ const LoginForm = ({ login }) => {
   );
 };
 
-LoginForm.PropTypes = {
+LoginForm.propTypes = {
   login: PropTypes.func.isRequired
 };
 
