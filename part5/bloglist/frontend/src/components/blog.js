@@ -37,8 +37,8 @@ const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
   return (
     <div className='blog'>
       {blog.title} - {blog.author}
-      
-      <button onClick={toggleShow}>view</button>
+
+      <button id='view-btn' onClick={toggleShow}>view</button>
 
       {showInfo ? blogInfo : null}
 

@@ -1,6 +1,7 @@
 import React from "react";
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Blog from "./blog";
 
 describe('<Blog />', () => {
@@ -19,12 +20,22 @@ describe('<Blog />', () => {
             }
         };
 
-        component = render(<Blog blog={blog} />)
+        mockHandler = jest.fn();
+
+        component = render(<Blog blog={blog}  />)
     })
-    
+
     test('renders content', () => {
         expect(component.container).toHaveTextContent('lorem ipsum dolor sit amet');
         
         expect(component.container).not.toHaveTextContent('likes');
+    });
+
+    test('url and likes are shown when view button is clicked', async () => {
+        const user = userEvent.setup();
+        const viewBtn = component.container.querySelector('#view-btn');
+        await user.click(viewBtn);
+
+        expect(component.container).toHaveTextContent('john smith');
     });
 });
