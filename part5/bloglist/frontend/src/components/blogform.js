@@ -28,21 +28,21 @@ const BlogForm = ({ handleCreateBlog }) => {
         <input
           type='text'
           value={title}
-          name='Title'
+          id='title-input'
           onChange={({ target }) => setTitle(target.value)} />
                 author:
         <input
           type='text'
           value={author}
-          name='Author'
+          id='author-input'
           onChange={({ target }) => setAuthor(target.value)} />
                 url:
         <input
           type='text'
           value={url}
-          name='Url'
+          id='url-input'
           onChange={({ target }) => setUrl(target.value)} />
-        <button type='submit'>post</button>
+        <button id='post-blog-btn' type='submit'>post</button>
       </form>
     </div>
   );
