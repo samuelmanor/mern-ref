@@ -78,12 +78,18 @@ describe('Bloglist', function() {
       cy.contains('- George Dvorsky');
     });
 
-    it.only('a blog can be liked', function() {
+    it('a blog can be liked', function() {
       cy.contains('view').click();
       cy.get('#like-btn').click().click();
 
       cy.contains('likes: 1');
-    })
+    });
 
+    it('a blog created by user can be deleted', function() {
+      cy.contains('Out There').contains('view').click();
+      cy.contains('delete blog').click();
+
+      cy.get('html').should('not.contain', 'Out There');
+    });
   });
 });

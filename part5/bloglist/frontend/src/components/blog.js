@@ -5,7 +5,7 @@ const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
 
   const showDelete = () => {
     if (user) {
-      return (<button onClick={() => handleDelete(blog.id)}>delete blog</button>);
+      return (<button id='delete-btn' onClick={() => handleDelete(blog.id)}>delete blog</button>);
     } else {
       return null;
     }
