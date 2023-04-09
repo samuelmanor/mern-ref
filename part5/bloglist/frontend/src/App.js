@@ -94,9 +94,7 @@ const App = () => {
     <div>
       <Notification message={notif} />
       {user === null
-        ? <Togglable buttonLabel='log in'>
-          <LoginForm login={handleLogin} />
-        </Togglable>
+        ? <LoginForm login={handleLogin} />
         : <div><p>{user.name} logged in</p><button onClick={handleLogout}>log out</button></div>}
 
       <h2>blogs</h2>

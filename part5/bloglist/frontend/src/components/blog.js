@@ -5,9 +5,9 @@ const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
 
   const showDelete = () => {
     if (user) {
-        return (<button onClick={() => handleDelete(blog.id)}>delete blog</button>)
+      return (<button onClick={() => handleDelete(blog.id)}>delete blog</button>);
     } else {
-        return null
+      return null;
     }
   };
 
@@ -28,9 +28,9 @@ const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
 
   const blogInfo = (
     <div>
-        <p>{blog.url}</p>
-        <p>likes: {blog.likes}</p> <button id='like-btn' onClick={addLike}>like</button>
-        <p>posted by {blog.user.username}</p>
+      <p>{blog.url}</p>
+      <p>likes: {blog.likes}</p> <button id='like-btn' onClick={addLike}>like</button>
+      <p>posted by {blog.user.username}</p>
     </div>
   );
 
