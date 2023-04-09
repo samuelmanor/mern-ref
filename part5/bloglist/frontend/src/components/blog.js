@@ -4,7 +4,7 @@ const Blog = ({ blog, handleUpdate, user, handleDelete }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   const showDelete = () => {
-    if (user) {
+    if (user && user.username === blog.user.username) {
       return (<button id='delete-btn' onClick={() => handleDelete(blog.id)}>delete blog</button>);
     } else {
       return null;

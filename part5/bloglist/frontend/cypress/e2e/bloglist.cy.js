@@ -91,5 +91,13 @@ describe('Bloglist', function() {
 
       cy.get('html').should('not.contain', 'Out There');
     });
+
+    it('a blog not created by user cant be deleted', function() {
+      cy.clearLocalStorage();
+      cy.login({ username: 'root', password: 'toor' });
+
+      cy.contains('view').click();
+      cy.get('html').should('not.contain', 'delete blog');
+    });
   });
 });
