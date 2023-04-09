@@ -19,4 +19,21 @@ describe('Bloglist', function() {
     cy.contains('username');
     cy.contains('password');
   });
+
+  it('user can log in', function() {
+    cy.get('#username').type('smm');
+    cy.get('#password').type('password');
+    cy.get('#login-btn').click();
+
+    cy.contains('Samuel Manor logged in');
+  });
+
+  it('user fails with wrong password', function() {
+    cy.get('#username').type('smm');
+    cy.get('#password').type('hello');
+    cy.get('#login-btn').click();
+
+    cy.contains('wrong username or password');
+    cy.get('html').should('not.contain', 'Samuel Manor logged in');
+  });
 });
