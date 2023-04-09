@@ -57,6 +57,11 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedNoteappUser');
+    setUser(null);
+  };
+
   const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility();
     noteService
@@ -107,14 +112,17 @@ const App = () => {
       <h1>Notes app</h1>
       <Notification message={errorMessage} />
 
-      <Togglable buttonLabel='login'>
-        <LoginForm
-          username={username}
-          password={password}
-          handleUsernameChange={({ target }) => setUsername(target.value)}
-          handlePasswordChange={({ target }) => setPassword(target.value)}
-          handleSubmit={handleLogin} />
-      </Togglable>
+      {user === null
+        ? <Togglable buttonLabel='login'>
+          <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleSubmit={handleLogin}
+            handleLogout={handleLogout} />
+        </Togglable>
+        : <button onClick={handleLogout}>log out</button>}
 
       {user && <div><p>{user.name} logged in</p> {noteForm()} </div>}
 
@@ -136,10 +144,11 @@ const App = () => {
           )}
         </ul>
       </ul>
-      <Togglable buttonLabel='new note' ref={noteFormRef}>
-        <NoteForm
-          createNote={addNote} />
-      </Togglable>
+      {user !== null
+        ? <Togglable buttonLabel='new note' ref={noteFormRef}>
+          <NoteForm createNote={addNote} />
+        </Togglable>
+        : null}
       <Footer />
     </div>
   );
