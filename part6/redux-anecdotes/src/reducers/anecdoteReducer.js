@@ -21,6 +21,8 @@ const anecdotesAtStart = [
   
   const anecdoteReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'NEW_ANECDOTE':
+            return state.concat(action.payload);
         case 'UPVOTE':
             const id = action.payload.id;
             const toUpdate = state.find(a => a.id === id);
@@ -29,6 +31,17 @@ const anecdotesAtStart = [
             return state.map(a => a.id !== id ? a : updatedAnecdote);
         default:
             return state;
+    };
+  };
+
+  export const createAnecdote = (content) => {
+    return {
+        type: 'NEW_ANECDOTE',
+        payload: {
+            content,
+            id: getId(),
+            votes: 0
+        }
     };
   };
 
