@@ -12,10 +12,7 @@ const NewAnecdote = () => {
 
         dispatch(createAnecdote(content));
 
-        dispatch(setNotif(`created ${content}`));
-        setTimeout(() => {
-            dispatch(setNotif(''));
-        }, 5000);
+        dispatch(setNotif(`created ${content}`, 5));
     };
 
     return (
