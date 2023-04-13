@@ -1,18 +1,21 @@
 import { useState } from 'react';
 
-const CreateNew = props => {
+const CreateNew = ({ addNew, useNavigate }) => {
   const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
   const [info, setInfo] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSubmit = event => {
     event.preventDefault()
-    props.addNew({
+    addNew({
       content,
       author,
       info,
       votes: 0
     });
+    navigate('/');
   };
 
   return (

@@ -17,7 +17,7 @@ const AnecdoteList = ({ anecdotes, Link }) => {
                 {mapped}
             </ul>
       </div>
-    )
-}
+    );
+};
 
 export default AnecdoteList;
