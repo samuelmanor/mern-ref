@@ -13,13 +13,14 @@ const Anecdote = ({ anecdote, handleClick }) => {
     );
 };
 
-const Anecdotes = () => {
+const Anecdotes = ({ filters }) => {
     const dispatch = useDispatch();
-    const anecdotes = useSelector(state => state);
+    const anecdotes = useSelector(state => {
+        return state.anecdotes.filter(a => a.content.toLowerCase().includes(state.filter.toLowerCase()));
+    });
     
     return (
         <div>
-            <button onClick={() => anecdotes.map(a => console.log(a))}>cl anec</button>
             {anecdotes.map(anecdote => 
                 <Anecdote
                     key={anecdote.id}
