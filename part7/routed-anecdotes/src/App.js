@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
   BrowserRouter as Router,
-  Routes, Route, useParams
+  Routes, Route, useParams, Link
 } from 'react-router-dom';
 
 import About from './components/About';
@@ -59,7 +59,7 @@ const App = () => {
           <Router>
             <Menu />
           <Routes>
-            <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
+            <Route path='/' element={<AnecdoteList anecdotes={anecdotes} Link={Link} />} />
             <Route path='/:id' element={<Anecdote useParams={useParams} anecdotes={anecdotes} />} />
             <Route path='/create' element={<CreateNew addNew={addNew}/>} />
             <Route path='/about' element={<About />} />
