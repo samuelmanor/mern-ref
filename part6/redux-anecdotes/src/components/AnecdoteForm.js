@@ -10,6 +10,11 @@ const NewAnecdote = () => {
         const content = event.target.anecdote.value;
         event.target.anecdote.value = '';
         dispatch(createAnecdote(content));
+
+        dispatch(setNotif('created xyz'));
+        setTimeout(() => {
+            dispatch(setNotif(''));
+        }, 5000);
     };
 
     return (
