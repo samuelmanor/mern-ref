@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { createAnecdote } from '../reducers/anecdoteReducer';
+import { setNotif } from '../reducers/notificationReducer';
 
 const NewAnecdote = () => {
     const dispatch = useDispatch();
