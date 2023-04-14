@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useField } from '../hooks';
 
 const CreateNew = ({ addNew, useNavigate }) => {
@@ -18,7 +17,6 @@ const CreateNew = ({ addNew, useNavigate }) => {
     };
     addNew(newAnecdote);
     navigate('/');
-    // console.log(newAnecdote)
   };
 
   const resetFields = (event) => {
