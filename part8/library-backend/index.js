@@ -85,6 +85,23 @@ let books = [
   },
 ]
 
+/*
+
+Implement query allBooks, which returns the details of all books.
+
+In the end, the user should be able to do the following query:
+
+query {
+  allBooks { 
+    title 
+    author
+    published 
+    genres
+  }
+}
+
+*/
+
 const typeDefs = `
   type Author {
     name: String!
@@ -102,13 +119,15 @@ const typeDefs = `
   type Query {
     bookCount: Int!
     authorCount: Int!
+    allBooks: [Book!]!
   }
 `
 
 const resolvers = {
   Query: {
     bookCount: () => books.length,
-    authorCount: () => authors.length
+    authorCount: () => authors.length,
+    allBooks: () => books
   }
 }
 
