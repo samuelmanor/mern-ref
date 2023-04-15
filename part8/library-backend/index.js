@@ -105,6 +105,15 @@ const typeDefs = `
     allBooks(author: String, genre: String): [Book!]!
     allAuthors: [Author!]!
   }
+
+  type Mutation {
+    addBook(
+      title: String!
+      author: String!
+      published: Int,
+      genres: [String!]!
+    ): Book
+  }
 `
 
 const resolvers = {
@@ -124,10 +133,31 @@ const resolvers = {
     },
     allAuthors: () => authors
   },
+
   Author: {
     bookCount: (root) => {
       const booksWritten = books.filter(b => b.author === root.name);
       return booksWritten.length;
+    }
+  },
+
+  Mutation: {
+    addBook: (root, args) => {
+      const existingAuthor = authors.find(a => a.name == args.author);
+      if (!existingAuthor) {
+        const newAuthor = { name: args.author };
+        authors = [ ...authors, newAuthor ];
+      }
+
+      const newBook = {
+        title: args.title,
+        author: args.author,
+        published: args.published,
+        genres: args.genres
+      }
+      books = [ ...books, newBook ];
+
+      return newBook;
     }
   }
 }
