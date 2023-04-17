@@ -1,8 +1,22 @@
+import { gql, useQuery, useMutation } from '@apollo/client';
+import { useState, useEffect } from 'react';
+
+import { ALL_AUTHORS } from '../queries';
+
 const Authors = (props) => {
+  const [authors, setAuthors] = useState([]);
+
+  const result = useQuery(ALL_AUTHORS);
+
+  useEffect(() => {
+    if (!result.loading) {
+      setAuthors(result.data.allAuthors);
+    }
+  }, [result]);
+
   if (!props.show) {
     return null
   }
-  const authors = []
 
   return (
     <div>
