@@ -1,11 +1,16 @@
 import { useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client'
+
+import { ADD_BOOK } from '../queries'
 
 const NewBook = (props) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
-  const [genres, setGenres] = useState([])
+  // const [genres, setGenres] = useState([])
+
+  const [ addBook ] = useMutation(ADD_BOOK);
 
   if (!props.show) {
     return null
@@ -14,19 +19,20 @@ const NewBook = (props) => {
   const submit = async (event) => {
     event.preventDefault()
 
-    console.log('add book...')
+    addBook({ variables: { title, author, published: Number(published), genres: genre } });
+    // console.log({ variables: { title, author, published: Number(published), genres: genre } });
 
     setTitle('')
     setPublished('')
     setAuthor('')
-    setGenres([])
+    // setGenres([])
     setGenre('')
   }
 
-  const addGenre = () => {
-    setGenres(genres.concat(genre))
-    setGenre('')
-  }
+  // const addGenre = () => {
+  //   setGenres(genres.concat(genre))
+  //   setGenre('')
+  // }
 
   return (
     <div>
@@ -54,15 +60,16 @@ const NewBook = (props) => {
           />
         </div>
         <div>
+          genre
           <input
             value={genre}
             onChange={({ target }) => setGenre(target.value)}
           />
-          <button onClick={addGenre} type="button">
-            add genre
-          </button>
+          {/* <button onClick={addGenre} type="button"> */}
+            {/* add genre */}
+          {/* </button> */}
         </div>
-        <div>genres: {genres.join(' ')}</div>
+        {/* <div>genres: {genres.join(' ')}</div> */}
         <button type="submit">create book</button>
       </form>
     </div>
