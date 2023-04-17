@@ -1,9 +1,22 @@
+import { gql, useQuery, useMutation } from '@apollo/client';
+import { useState, useEffect } from 'react';
+
+import { ALL_BOOKS } from '../queries';
+
 const Books = (props) => {
+  const [books, setBooks] = useState([]);
+
+  const result = useQuery(ALL_BOOKS);
+
+  useEffect(() => {
+    if (!result.loading) {
+      setBooks(result.data.allBooks);
+    }
+  });
+
   if (!props.show) {
     return null
   }
-
-  const books = []
 
   return (
     <div>
