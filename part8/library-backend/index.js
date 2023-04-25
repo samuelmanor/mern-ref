@@ -1,5 +1,21 @@
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+const Author = require('./models/author');
+const Book = require('./models/book');
+
+require('dotenv').config();
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+mongoose.connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB');
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB', error.message);
+  });
 
 let authors = [
   {
@@ -26,12 +42,6 @@ let authors = [
     id: "afa5b6f3-344d-11e9-a414-719c6709cf3e",
   },
 ]
-
-/*
- * English:
- * It might make more sense to associate a book with its author by storing the author's id in the context of the book instead of the author's name
- * However, for simplicity, we will store the author's name in connection with the book
-*/
 
 let books = [
   {
@@ -95,7 +105,7 @@ const typeDefs = `
   type Book {
     title: String!
     published: Int!
-    author: String!
+    author: Author!
     genres: [String!]
   }
 
